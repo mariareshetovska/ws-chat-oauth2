@@ -3,13 +3,11 @@ package main
 import (
 	"log"
 	"net/http"
-	"ws/config"
 	"ws/controller"
 	ws "ws/ws"
 )
 
 func main() {
-	config.LoadEnv()
 	s := ws.NewServer()
 
 	http.HandleFunc("/", HandleMain)
