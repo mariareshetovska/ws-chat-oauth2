@@ -21,7 +21,7 @@ func main() {
 	http.HandleFunc("/chat", s.StaticHandler)
 
 	log.Println("Server started...")
-	err := http.ListenAndServeTLS(":808", "go-server.crt", "go-server.key", nil)
+	err := http.ListenAndServeTLS(":8080", "go-server.crt", "go-server.key", nil)
 	if err != nil {
 		log.Fatalf("Server error: %s", err)
 	}
