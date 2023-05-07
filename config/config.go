@@ -20,7 +20,7 @@ func LoadEnv() error {
 func SetupLinkedinConfig() *oauth2.Config {
 	LoadEnv()
 	return &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/auth/linkedin/callback",
+		RedirectURL:  os.Getenv("LINKEDIN_REDIRECT_URL"),
 		ClientID:     os.Getenv("LINKEDIN_CLIENT_ID"),
 		ClientSecret: os.Getenv("LINKEDIN_CLENT_SECRET"),
 		Scopes:       []string{"r_emailaddress", "r_liteprofile"},
@@ -32,7 +32,7 @@ func SetupLinkedinConfig() *oauth2.Config {
 func SetupGoogleConfig() *oauth2.Config {
 	LoadEnv()
 	return &oauth2.Config{
-		RedirectURL:  "http://localhost:8080/auth/google/callback",
+		RedirectURL:  os.Getenv("GOOGLE_REDIRECT_URL"),
 		ClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
 		ClientSecret: os.Getenv("GOOGLE_CLENT_SECRET"),
 		Scopes: []string{

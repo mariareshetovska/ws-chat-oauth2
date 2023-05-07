@@ -1,9 +1,9 @@
-# Websocket Chat App with Authentication
+# Websocket Chat App with Authentication and SSL Certificate
 
-This is a simple chat application built in Golang that uses WebSockets for real-time communication and Google and Linkedin authentication for user authentication.
+This is a simple chat application built in Golang that uses WebSockets for real-time communication and Google and Linkedin authentication for user authentication. It also includes an SSL certificate for secure communication.
 
 ## How to Use
-1. Clone this repository to your local machine.
+1. Clone this repository
 
 2. Install Golang if it is not already installed.
 
@@ -11,15 +11,29 @@ This is a simple chat application built in Golang that uses WebSockets for real-
 ```env
 GOOGLE_CLIENT_ID=<your-google-client-id>
 GOOGLE_CLIENT_SECRET=<your-google-client-secret>
+GOOGLE_REDIRECT_URL=<your-google-redirect-url>
 
 LINKEDIN_CLIENT_ID=<your-linkedin-client-id>
 LINKEDIN_CLIENT_SECRET=<your-linkedin-client-secret>
+LINKEDIN_REDIRECT_URL=<your-linkedin-redirect-url>
 ```
-4. Run the application using the following command in the root directory of the project:
-```go
-go run cmd/main.go
+5. Generate an SSL certificate by running the following command in the root directory of the project:
 ```
-5. Navigate to http://localhost:8080 in your web browser to see the chat application.
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout go-server.key -out go-server.crt
+```
+
+
+Also, to download and install all dependencies required by the application, simply run the deploy.sh file inside the root directory:
+```
+sh deploy.sh
+```
+And then go to .env file and add variables. After that to build and start app:
+```
+go build -o wsapp ./cmd
+./wsapp
+```
+
+5. Navigate to https://your_url in your web browser to see the chat application.
 
 6. Click on "Google Log In" or "LinkedIn Log In" to authenticate using OAuth2.
 
