@@ -10,7 +10,7 @@ import (
 func main() {
 	s := ws.NewServer()
 
-	http.HandleFunc("/", HandleMain)
+	http.HandleFunc("/", controller.HandleMain)
 	http.HandleFunc("/auth/google/login", controller.HandleGoogleLogin)
 	http.HandleFunc("/auth/google/callback", controller.HandleGoogleCallback)
 
@@ -20,14 +20,9 @@ func main() {
 	http.HandleFunc("/echo", s.EchoHandler)
 	http.HandleFunc("/chat", s.StaticHandler)
 
-	log.Println("Server started on http://localhost:8080")
-	err := http.ListenAndServe(":8080", nil)
+	log.Println("Server started...")
+	err := http.ListenAndServeTLS(":808", "go-server.crt", "go-server.key", nil)
 	if err != nil {
 		log.Fatalf("Server error: %s", err)
 	}
-}
-
-func HandleMain(w http.ResponseWriter, r *http.Request) {
-	log.Printf("Serving home page to user %s", r.RemoteAddr)
-	http.ServeFile(w, r, "home.html")
 }

@@ -34,6 +34,11 @@ func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func HandleMain(w http.ResponseWriter, r *http.Request) {
+	log.Printf("Serving home page to user %s", r.RemoteAddr)
+	http.ServeFile(w, r, "home.html")
+}
+
 func getUserInfoGoogle(state string, code string) error {
 	if state != oauthStateString {
 		return fmt.Errorf("invalid oauth state")
